@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Website</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      nav {
+        background-color: #333;
+        padding: 1rem;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style-type: none;
+      }
+
+      .nav-links li {
+        margin-left: 1.5rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #f0f0f0;
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 2px 0;
+      }
+
+      @media screen and (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          position: absolute;
+          top: 60px;
+          left: 0;
+          background-color: #333;
+          padding: 1rem;
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .nav-links li {
+          margin: 0.5rem 0;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+      }
+
+      /* Hero Section Styles */
+      .hero {
+        height: 60vh; /* Reduced height */
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url("https://source.unsplash.com/random/1920x1080?mentorship");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        padding: 20px;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease forwards;
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease 0.5s forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease 1s forwards;
+      }
+
+      .cta-button:hover {
+        background-color: #45a049;
+      }
+
+      /* Grid Section Styles */
+      .grid-section {
+        padding: 4rem 2rem;
+        background-color: #f0f0f0;
+      }
+
+      .grid-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .grid-item {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .grid-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .grid-item h3 {
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .grid-item p {
+        margin-bottom: 1.5rem;
+        color: #666;
+      }
+
+      .book-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .book-button:hover {
+        background-color: #45a049;
+      }
+
+      /* Top Mentors Section Styles */
+      .top-mentors {
+        padding: 4rem 2rem;
+        background-color: #fff;
+      }
+
+      .top-mentors h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #333;
+        font-size: 2rem;
+      }
+
+      .mentors-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .mentor-card {
+        text-align: center;
+        padding: 1rem;
+      }
+
+      .mentor-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1rem;
+        border: 3px solid #4caf50;
+      }
+
+      .mentor-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .mentor-title {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 0.5rem;
+      }
+
+      .mentor-experience {
+        font-size: 0.9rem;
+        color: #888;
+      }
+
+      /* Top Courses Section Styles */
+      .top-courses {
+        padding: 4rem 2rem;
+        background-color: #f9f9f9;
+      }
+
+      .top-courses h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #333;
+        font-size: 2rem;
+      }
+
+      .courses-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .course-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 300px;
+        transition: transform 0.3s ease;
+      }
+
+      .course-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .course-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .course-content {
+        padding: 1.5rem;
+      }
+
+      .course-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .course-description {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 1rem;
+      }
+
+      .course-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #4caf50;
+        margin-bottom: 1rem;
+      }
+
+      .enroll-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .enroll-button:hover {
+        background-color: #45a049;
+      }
+
+      /* Testimonials Carousel Styles */
+      .testimonials {
+        padding: 4rem 2rem;
+        background-color: #f0f0f0;
+      }
+
+      .testimonials h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #333;
+        font-size: 2rem;
+      }
+
+      .testimonial-carousel {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .testimonial {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 1rem;
+      }
+
+      .testimonial-author {
+        font-weight: bold;
+      }
+
+      /* FAQ Section Styles */
+      .faq {
+        padding: 4rem 2rem;
+        background-color: #fff;
+      }
+
+      .faq h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #333;
+        font-size: 2rem;
+      }
+
+      .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .faq-item {
+        margin-bottom: 1rem;
+      }
+
+      .faq-question {
+        background-color: #f0f0f0;
+        padding: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .faq-answer {
+        background-color: #fff;
+        padding: 1rem;
+        display: none;
+      }
+
+      /* Newsletter Signup Styles */
+      .newsletter {
+        padding: 4rem 2rem;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+      }
+
+      .newsletter h2 {
+        margin-bottom: 1rem;
+      }
+
+      .newsletter-form {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+      }
+
+      .newsletter-form input[type="email"] {
+        flex-grow: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 4px 0 0 4px;
+      }
+
+      .newsletter-form button {
+        padding: 10px 20px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+      }
+
+      /* Upcoming Webinars Styles */
+      .webinars {
+        padding: 4rem 2rem;
+        background-color: #f9f9f9;
+      }
+
+      .webinars h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #333;
+        font-size: 2rem;
+      }
+
+      .webinar-list {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .webinar-item {
+        background-color: white;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .webinar-date {
+        font-weight: bold;
+        color: #4caf50;
+      }
+
+      /* Skills Assessment Tool Styles */
+      .skills-assessment {
+        padding: 4rem 2rem;
+        background-color: #fff;
+        text-align: center;
+      }
+
+      .skills-assessment h2 {
+        margin-bottom: 2rem;
+        color: #333;
+        font-size: 2rem;
+      }
+
+      .assessment-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .assessment-button:hover {
+        background-color: #45a049;
+      }
+
+      /* Chat Bot Styles */
+      .chat-bot {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: none;
+      }
+
+      .chat-header {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .close-chat {
+        cursor: pointer;
+      }
+
+      .chat-messages {
+        height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+      }
+
+      .message {
+        margin-bottom: 10px;
+        padding: 8px;
+        border-radius: 5px;
+        max-width: 80%;
+      }
+
+      .bot-message {
+        background-color: #f0f0f0;
+        align-self: flex-start;
+      }
+
+      .user-message {
+        background-color: #4caf50;
+        color: white;
+        align-self: flex-end;
+        margin-left: auto;
+      }
+
+      .chat-input {
+        display: flex;
+        padding: 10px;
+      }
+
+      .chat-input input {
+        flex-grow: 1;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+      }
+
+      .chat-input button {
+        padding: 5px 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        margin-left: 5px;
+        cursor: pointer;
+      }
+
+      .chat-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <div class="logo">Your Logo</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#mentors">Mentors</a></li>
+        </ul>
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Mentor Guide</h1>
+        <p class="hero-subtitle">I Am Here</p>
+        <a href="#" class="cta-button">Get Started</a>
+      </div>
+    </section>
+
+    <section class="grid-section">
+      <div class="grid-container">
+        <div class="grid-item">
+          <h3>Career Guidance</h3>
+          <p>
+            Get expert advice on your career path and professional development.
+          </p>
+          <a href="#" class="book-button">Book Session</a>
+        </div>
+        <div class="grid-item">
+          <h3>Skill Development</h3>
+          <p>Enhance your skills with personalized mentoring and training.</p>
+          <a href="#" class="book-button">Book Session</a>
+        </div>
+        <div class="grid-item">
+          <h3>Leadership Coaching</h3>
+          <p>Learn effective leadership strategies from experienced mentors.</p>
+          <a href="#" class="book-button">Book Session</a>
+        </div>
+        <div class="grid-item">
+          <h3>Personal Growth</h3>
+          <p>Achieve your personal goals with guidance from life coaches.</p>
+          <a href="#" class="book-button">Book Session</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="top-mentors">
+      <h2>Our Top Mentors</h2>
+      <div class="mentors-container">
+        <div class="mentor-card">
+          <img
+            src="https://randomuser.me/api/portraits/women/1.jpg"
+            alt="Jane Doe"
+            class="mentor-image"
+          />
+          <h3 class="mentor-name">Jane Doe</h3>
+          <p class="mentor-title">Senior Software Engineer</p>
+          <p class="mentor-experience">15+ years in Tech</p>
+        </div>
+        <div class="mentor-card">
+          <img
+            src="https://randomuser.me/api/portraits/men/2.jpg"
+            alt="John Smith"
+            class="mentor-image"
+          />
+          <h3 class="mentor-name">John Smith</h3>
+          <p class="mentor-title">Marketing Director</p>
+          <p class="mentor-experience">10+ years in Digital Marketing</p>
+        </div>
+        <div class="mentor-card">
+          <img
+            src="https://randomuser.me/api/portraits/women/3.jpg"
+            alt="Emily Brown"
+            class="mentor-image"
+          />
+          <h3 class="mentor-name">Emily Brown</h3>
+          <p class="mentor-title">UX/UI Designer</p>
+          <p class="mentor-experience">8+ years in Design</p>
+        </div>
+        <div class="mentor-card">
+          <img
+            src="https://randomuser.me/api/portraits/men/4.jpg"
+            alt="Michael Johnson"
+            class="mentor-image"
+          />
+          <h3 class="mentor-name">Michael Johnson</h3>
+          <p class="mentor-title">Data Scientist</p>
+          <p class="mentor-experience">12+ years in Analytics</p>
+        </div>
+        <div class="mentor-card">
+          <img
+            src="https://randomuser.me/api/portraits/women/5.jpg"
+            alt="Sarah Lee"
+            class="mentor-image"
+          />
+          <h3 class="mentor-name">Sarah Lee</h3>
+          <p class="mentor-title">Product Manager</p>
+          <p class="mentor-experience">9+ years in Product Development</p>
+        </div>
+        <div class="mentor-card">
+          <img
+            src="https://randomuser.me/api/portraits/men/6.jpg"
+            alt="David Chen"
+            class="mentor-image"
+          />
+          <h3 class="mentor-name">David Chen</h3>
+          <p class="mentor-title">Entrepreneurship Coach</p>
+          <p class="mentor-experience">20+ years as Founder & CEO</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="top-courses">
+      <h2>Our Top Courses - Certificate Included</h2>
+      <div class="courses-container">
+        <div class="course-card">
+          <img
+            src="https://source.unsplash.com/random/300x200?coding"
+            alt="Web Development"
+            class="course-image"
+          />
+          <div class="course-content">
+            <h3 class="course-title">Web Development Bootcamp</h3>
+            <p class="course-description">
+              Master HTML, CSS, and JavaScript in this comprehensive course.
+            </p>
+            <p class="course-price">Just ₹199</p>
+            <a href="#" class="enroll-button">Enroll Now</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://source.unsplash.com/random/300x200?marketing"
+            alt="Digital Marketing"
+            class="course-image"
+          />
+          <div class="course-content">
+            <h3 class="course-title">Digital Marketing Mastery</h3>
+            <p class="course-description">
+              Learn SEO, social media marketing, and content strategy.
+            </p>
+            <p class="course-price">Just ₹199</p>
+            <a href="#" class="enroll-button">Enroll Now</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://source.unsplash.com/random/300x200?data"
+            alt="Data Science"
+            class="course-image"
+          />
+          <div class="course-content">
+            <h3 class="course-title">Data Science Fundamentals</h3>
+            <p class="course-description">
+              Explore data analysis, machine learning, and visualization
+              techniques.
+            </p>
+            <p class="course-price">Just ₹199</p>
+            <a href="#" class="enroll-button">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <h2>What Our Students Say</h2>
+      <div class="testimonial-carousel">
+        <div class="testimonial">
+          <p class="testimonial-text">
+            "This platform has been a game-changer for my career. The mentors
+            are top-notch and the courses are incredibly practical."
+          </p>
+          <p class="testimonial-author">- Sarah J., Software Developer</p>
+        </div>
+        <!-- Add more testimonials as needed -->
+      </div>
+    </section>
+
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            How long do I have access to the courses?
+          </div>
+          <div class="faq-answer">
+            You have lifetime access to all purchased courses.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Are the certificates recognized by employers?
+          </div>
+          <div class="faq-answer">
+            Yes, our certificates are industry-recognized and can boost your
+            resume.
+          </div>
+        </div>
+        <!-- Add more FAQ items as needed -->
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <h2>Stay Updated with Our Newsletter</h2>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+
+    <section class="webinars">
+      <h2>Upcoming Live Webinars</h2>
+      <div class="webinar-list">
+        <div class="webinar-item">
+          <p class="webinar-date">June 15, 2023 - 2:00 PM EST</p>
+          <h3>Mastering React: Advanced Techniques</h3>
+          <p>
+            Join our expert React developer for an in-depth session on advanced
+            React concepts.
+          </p>
+        </div>
+        <div class="webinar-item">
+          <p class="webinar-date">June 22, 2023 - 1:00 PM EST</p>
+          <h3>Data Science in Finance: Real-world Applications</h3>
+          <p>
+            Discover how data science is revolutionizing the finance industry
+            with practical examples.
+          </p>
+        </div>
+        <!-- Add more webinar items as needed -->
+      </div>
+    </section>
+
+    <section class="skills-assessment">
+      <h2>Assess Your Skills</h2>
+      <p>
+        Take our free skills assessment to identify your strengths and areas for
+        improvement.
+      </p>
+      <a href="#" class="assessment-button">Start Assessment</a>
+    </section>
+
+    <div class="chat-toggle" id="chatToggle">Chat with us</div>
+
+    <div class="chat-bot" id="chatBot">
+      <div class="chat-header">
+        <span>Chat Support</span>
+        <span class="close-chat" id="closeChat">&times;</span>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">Hello! How can I help you today?</div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type your message..." />
+        <button id="sendMessage">Send</button>
+      </div>
+    </div>
+
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+
+      // Simple FAQ toggle functionality
+      const faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach((question) => {
+        question.addEventListener("click", () => {
+          const answer = question.nextElementSibling;
+          answer.style.display =
+            answer.style.display === "block" ? "none" : "block";
+        });
+      });
+
+      // Chat Bot Functionality
+      const chatToggle = document.getElementById("chatToggle");
+      const chatBot = document.getElementById("chatBot");
+      const closeChat = document.getElementById("closeChat");
+      const chatMessages = document.getElementById("chatMessages");
+      const userInput = document.getElementById("userInput");
+      const sendMessage = document.getElementById("sendMessage");
+
+      chatToggle.addEventListener("click", () => {
+        chatBot.style.display = "block";
+        chatToggle.style.display = "none";
+      });
+
+      closeChat.addEventListener("click", () => {
+        chatBot.style.display = "none";
+        chatToggle.style.display = "block";
+      });
+
+      sendMessage.addEventListener("click", sendUserMessage);
+      userInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          sendUserMessage();
+        }
+      });
+
+      function sendUserMessage() {
+        const message = userInput.value.trim();
+        if (message) {
+          addMessage(message, "user-message");
+          userInput.value = "";
+          // Simulate bot response
+          setTimeout(() => {
+            const botReply = getBotReply(message);
+            addMessage(botReply, "bot-message");
+          }, 1000);
+        }
+      }
+
+      function addMessage(message, className) {
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message", className);
+        messageElement.textContent = message;
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function getBotReply(message) {
+        // This is a very basic reply system. In a real application,
+        // you'd want to use a more sophisticated system or API.
+        const lowercaseMessage = message.toLowerCase();
+        if (
+          lowercaseMessage.includes("hello") ||
+          lowercaseMessage.includes("hi")
+        ) {
+          return "Hello! How can I assist you today?";
+        } else if (lowercaseMessage.includes("course")) {
+          return "We offer a variety of courses. Which subject are you interested in?";
+        } else if (lowercaseMessage.includes("mentor")) {
+          return "Our mentors are industry experts with years of experience. Would you like to know more about a specific field?";
+        } else if (
+          lowercaseMessage.includes("price") ||
+          lowercaseMessage.includes("cost")
+        ) {
+          return "Our courses start at just ₹199. Each course includes a certificate upon completion.";
+        } else {
+          return "I'm not sure I understand. Could you please rephrase your question?";
+        }
+      }
+    </script>
+  </body>
+</html>
